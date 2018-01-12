@@ -1,0 +1,62 @@
+#curmon{
+    width: 50px;
+    height: 50px;
+    background-image: url('./img/pika.png');
+    background-position: center;
+    background-size: cover;
+    margin-left: 10px;
+    position: absolute;
+}
+
+.attack{
+    width: 25px;
+    height: 25px;
+    background-image: url('./img/lightning.svg');
+    background-position: center;
+    background-size: cover;
+    display: inline-block;
+    position: absolute;
+    left: 70px;
+    /* -webkit-animation: attackMove 4s linear forwards;
+    animation: attackMove 4s linear forwards; */
+}
+
+/* Safari 4.0 - 8.0 */
+/* @-webkit-keyframes attackMove {
+    from {left: 70px;}
+    to {left:100%;}
+} */
+
+/* Standard syntax */
+/* @keyframes attackMove {
+    from {left: 70px;}
+    to {left:100%;}
+} */
+
+.monster{
+    width: 40px;
+    height: 40px;
+    background-image: url('./img/firemonster.png');
+    background-position: center;
+    background-size: cover;
+    display: inline-block;
+    position: absolute;
+    left: 100%;
+    -webkit-animation: monsterMove 4s linear;
+    animation: monsterMove 4s linear;
+    transition: 0.2s;
+}
+
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes monsterMove {
+    from {left: 100%;}
+    to {left:5px;}
+}
+
+/* Standard syntax */
+@keyframes monsterMove {
+    from {left: 100%;}
+    to {left:5px;}
+}
+
