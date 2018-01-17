@@ -62,7 +62,9 @@ let currPokemon:Pokemon = new Pokemon("pika","lightning",2,2,1,2,0);
 let pokemonPackages:Pokemon[] = [currPokemon];
 let monsters:string[] = ['firemonster','watermonster','leafmonster','toxicmonster','windmonster','bugmonster'];
 
-let fire1:Pokemon = new Pokemon("fire1","fire",2,2,1,2,0);
+let fire1:Pokemon = new Pokemon("fire","fire",2,2,1,2,0);
+let water1:Pokemon = new Pokemon("water","water",2,2,1,2,0);
+let leaf1:Pokemon = new Pokemon("leaf","leaf",2,2,1,2,0);
 let addableMonsters:Pokemon[] = [];
 
 interface relations{
@@ -118,6 +120,11 @@ $(function(){
         addableMonsters.push(poke);
     }
 
+    addableMonsters.push(fire1);
+    addableMonsters.push(water1);
+    addableMonsters.push(leaf1);
+
+
     $(window).keypress(function(){
         // addAttack(cordY);
         addMonster();
@@ -158,6 +165,7 @@ $(function(){
             pokemonPackages[index] = currPokemon;
             currPokemon = temp;
             pokemonPackages[0] = currPokemon;
+            console.log(currPokemon)
             showPakages();
         }
     })
@@ -204,7 +212,7 @@ function addMonster(){
     let monsterType:string = poke.type;
     let img:string = "'./img/"+monsterName+".png'";
     let style:string = 'style="top:'+y+'px; background-image:url('+img+')"';
-    $('#gameArea').append('<div onmouseover="javascript:monsterHover(this)" class="monster '+monsterName+' '+monsterType+' "'+style+'></div>');
+    $('#gameArea').append('<div onmouseover="javascript:monsterHover(this)" class="monster '+monsterName+'" '+style+'></div>');
 }
 
 function calculateHpExp(poke1type:string,poke2type:string){
@@ -221,7 +229,9 @@ function calculateHpExp(poke1type:string,poke2type:string){
 
 function monsterHover(x:any){
     let monsterName = x.classList[1];
-    let monsterType = x.classList[2];
+    let monsterType = monsterName.replace('monster','');
+    console.log(x.classList)
+    console.log(monsterType)
     if(currPokemon.hp>=0){
         calculateHpExp(currPokemon.type,monsterType);
         if(getPokemonMode==1 && balls>0){

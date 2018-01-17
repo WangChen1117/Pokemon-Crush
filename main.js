@@ -45,7 +45,9 @@ var Pokemon = /** @class */ (function () {
 var currPokemon = new Pokemon("pika", "lightning", 2, 2, 1, 2, 0);
 var pokemonPackages = [currPokemon];
 var monsters = ['firemonster', 'watermonster', 'leafmonster', 'toxicmonster', 'windmonster', 'bugmonster'];
-var fire1 = new Pokemon("fire1", "fire", 2, 2, 1, 2, 0);
+var fire1 = new Pokemon("fire", "fire", 2, 2, 1, 2, 0);
+var water1 = new Pokemon("water", "water", 2, 2, 1, 2, 0);
+var leaf1 = new Pokemon("leaf", "leaf", 2, 2, 1, 2, 0);
 var addableMonsters = [];
 var compare = {
     fire: [['leaf', 'bug'], ['fire', 'water']],
@@ -73,6 +75,9 @@ $(function () {
         var poke = new Pokemon(monsters[i], monsters[i].replace('monster', ''), 2, 2, 1, 2, 0);
         addableMonsters.push(poke);
     }
+    addableMonsters.push(fire1);
+    addableMonsters.push(water1);
+    addableMonsters.push(leaf1);
     $(window).keypress(function () {
         // addAttack(cordY);
         addMonster();
@@ -109,6 +114,7 @@ $(function () {
             pokemonPackages[index] = currPokemon;
             currPokemon = temp;
             pokemonPackages[0] = currPokemon;
+            console.log(currPokemon);
             showPakages();
         }
     });
@@ -148,7 +154,7 @@ function addMonster() {
     var monsterType = poke.type;
     var img = "'./img/" + monsterName + ".png'";
     var style = 'style="top:' + y + 'px; background-image:url(' + img + ')"';
-    $('#gameArea').append('<div onmouseover="javascript:monsterHover(this)" class="monster ' + monsterName + ' ' + monsterType + ' "' + style + '></div>');
+    $('#gameArea').append('<div onmouseover="javascript:monsterHover(this)" class="monster ' + monsterName + '" ' + style + '></div>');
 }
 function calculateHpExp(poke1type, poke2type) {
     if (compare[poke1type][0].indexOf(poke2type) >= 0) {
@@ -165,7 +171,9 @@ function calculateHpExp(poke1type, poke2type) {
 }
 function monsterHover(x) {
     var monsterName = x.classList[1];
-    var monsterType = x.classList[2];
+    var monsterType = monsterName.replace('monster', '');
+    console.log(x.classList);
+    console.log(monsterType);
     if (currPokemon.hp >= 0) {
         calculateHpExp(currPokemon.type, monsterType);
         if (getPokemonMode == 1 && balls > 0) {
